@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { View, ScrollView, Text, TextInput } from 'react-native';
 import { BorderlessButton, RectButton } from 'react-native-gesture-handler';
 import { Feather } from '@expo/vector-icons';
 import AsyncStorage from '@react-native-community/async-storage';
+import { useFocusEffect } from '@react-navigation/native';
 
 import styles from './styles';
 
@@ -13,7 +14,7 @@ import api from '../../services/api';
 
 function TeacherList() {
     const [teachers, setTeachers] = useState([]);
-    const [favorites, setFavorites] = useState([]);
+    const [favorites, setFavorites] = useState<number[]>([]);
     const [isFiltersVisible, setIsFiltersVisible] = useState(false);
     
 
@@ -21,30 +22,41 @@ function TeacherList() {
     const [week_day, setWeekDay] = useState('');
     const [time, setTime] = useState('');
 
-    useEffect(() => {
+    function loadFavorites() {
         AsyncStorage.getItem('favorites').then(response => {
             if (response) {
                 const favoritedTeachers = JSON.parse(response);
-                const favoritedTeachersIds = favoritedTeachers.map(teacher => {
+                const favoritedTeachersIds = favoritedTeachers.map((teacher: Teacher) => {
                     return teacher.id;
-                })
-                setFavorites();
+                });
+    
+                setFavorites(favoritedTeachersIds);
             }
         });
-    }, [])
+    }
+
+    useFocusEffect(
+        React.useCallback(() => {
+            loadFavorites();
+        }, [favorites])
+    );
 
     function handleToggleFiltersVisible() {
         setIsFiltersVisible(!isFiltersVisible);
     }
 
     async function handleFiltersSubmit() {
+        loadFavorites();
+
         const response = await api.get('classes', {
             params: {
                 subject,
                 week_day,
-                time
+                time,
             }
         });
+
+        console.log(response.data);
 
         setIsFiltersVisible(false);
         setTeachers(response.data);
@@ -69,7 +81,7 @@ function TeacherList() {
                             onChangeText={text => setSubject(text)}
                             placeholder="Which your subject?"
                             placeholderTextColor='#C1bccc'
-                            />
+                        />
 
                         <View style={styles.inputGroup}>
                             <View style={styles.inputBlock}>
@@ -80,7 +92,7 @@ function TeacherList() {
                                     onChangeText={text => setWeekDay(text)}
                                     placeholder="Your study day"
                                     placeholderTextColor='#C1bccc'
-                                    />
+                                />
                             </View>
 
                             <View style={styles.inputBlock}>
@@ -91,7 +103,7 @@ function TeacherList() {
                                     onChangeText={text => setTime(text)}
                                     placeholder="Your study hour"
                                     placeholderTextColor='#C1bccc'
-                                    />
+                                />
                             </View>
                         </View>
 
@@ -115,7 +127,7 @@ function TeacherList() {
                         <TeacherItem 
                             key={teacher.id} 
                             teacher={teacher}
-                            favorited={}
+                            favorited={favorites.includes(teacher.id)}
                         />
                     )
                 })}
