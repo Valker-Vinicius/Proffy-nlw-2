@@ -1,12 +1,12 @@
 <h1 align="center">
-    <img src= "https://raw.githubusercontent.com/RafaelGoulartB/Proffy/master/.github/logo.png"/>
+    <img src= "https://raw.githubusercontent.com/RafaelGoulartB/Proffy/master/.github/logo.png" />
 </h1>
 
 <p align="center" >
     The Proffy was a project developed in one week at the <strong>Next Level Week</strong>.  
 </p>
 
-<h3>Technologies</h3>
+<h3>👨‍💻 Technologies</h3>
 
 - [Typescript](https://www.typescriptlang.org/)
 - [React](https://reactjs.org/)
@@ -14,7 +14,7 @@
 - [Expo](https://expo.io/)
 - [Sqlite 3](https://www.sqlite.org/index.html)
 
-<h2>Web version</h2>
+<h2>🖥 Web version</h2>
 
 <p>
     On this version of the <strong>Proffy 1.0</strong>, teachers can 
@@ -26,7 +26,7 @@
 
 ![desktop](https://user-images.githubusercontent.com/65914461/90155668-f7f7cd80-dd61-11ea-8920-f609a9d461d1.gif)
 
-<h2>Mobile version</h2>
+<h2>📱 Mobile version</h2>
 
 <p>
     On the <strong>Proffy 1.0</strong>, the mobile version is a bit limited, 
@@ -34,9 +34,12 @@
     However, the mobile version makes possible to mark teachers as <strong>favorites</strong>.
 </p>
 
-![mobile](https://user-images.githubusercontent.com/65914461/90155587-e1ea0d00-dd61-11ea-9953-2208103f36ee.gif)
+<img 
+    src="https://user-images.githubusercontent.com/65914461/90155587-e1ea0d00-dd61-11ea-9953-2208103f36ee.gif" 
+    height= 500
+/>
 
-<h2>1.0 version?</h2>
+<h2>🤔 1.0 version?</h2>
 
 <p>
     Yeah, i'm right now working in a <strong>2.0 version</strong>, with new features, as a login section, register of teachers in mobile version and more.
