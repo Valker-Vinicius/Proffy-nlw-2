@@ -101,7 +101,6 @@ const TeacherItem: React.FC<TeacherItemProps> = ({ teacher, favorited }) => {
                             ? <Image source={unfavoriteIcon}/>
                             : <Image source={heartOutlineIcon}/>
                         }
-                        {/**/}
                         
                     </RectButton>
                     
